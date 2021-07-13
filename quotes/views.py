@@ -7,18 +7,40 @@ def home(request):
     import requests
     import json
 
-    api_request = requests.get('https://cloud.iexapis.com/stable/stock/aapl/quote/?token=pk_4795a3382d6442558cd97acafe4b28ec')
-    try:
-        api = json.loads(api_request.content)
-    except Exception as e:
-        api = 'Error...'
+    if request.method == 'POST':
+        ticker = request.POST['ticker']
+        link = 'https://cloud.iexapis.com/stable/stock/' + ticker + '/quote/?token=pk_4795a3382d6442558cd97acafe4b28ec'
+        api_request = requests.get(link)
+        try:
+            api = json.loads(api_request.content)
+        except Exception as e:
+            api = 'Error...'
 
-    contex = {
-        'key': 'value',
-        'api': api,
-    }
+        contex = {
+            'key': 'value',
+            'api': api,
+            'ticker': ticker,
+            'link': link,
+        }
 
-    return render(request, 'home.html', contex)
+        return render(request, 'home.html', contex)
+    
+    else:
+        api_request = requests.get('https://cloud.iexapis.com/stable/stock/aapl/quote/?token=pk_4795a3382d6442558cd97acafe4b28ec')
+        try:
+            api = json.loads(api_request.content)
+        except Exception as e:
+            api = 'Error...'
+        
+        contex = {
+            'key': 'value',
+            'api': api,
+            'ticker': 'get a ticker man',
+        }
+        return render(request, 'home.html', contex)
+
+
+
 
 def about(request):
 

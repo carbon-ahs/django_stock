@@ -31,10 +31,10 @@
             </li>
             
         </ul>
-        <form class="d-flex" method="POST">
+        <form action="{% url 'home' %}" class="d-flex" method="POST">
             {% csrf_token %}
-            <input class="form-control me-2" type="search" placeholder="search" aria-label="Search" name = 'search_item'>
-            <button class="btn btn-outline-secondary" type="submit">Search</button>
+            <input class="form-control me-2" type="search" placeholder="Get Stock Data" aria-label="Search" name = 'ticker'>
+            <button class="btn btn-outline-secondary" type="submit">Search</button> 
         </form>
         </div>
     </div>

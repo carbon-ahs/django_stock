@@ -5,5 +5,22 @@
 
 {% block content %}
     <h1> HOME </h1>
-    {{ api }}
+    {{ link }}
+    {% if api %}
+        {% if api == 'Error...' %}
+            <p> There is a problem. </br>
+            Try again later. </p>
+        {% else %}
+            <h1>{{ api.companyName }}</h1>
+            <p>
+                Price           : ${{ api.latestPrice }} </br>
+                Total marketCap : ${{ api.marketCap }} </br>
+                week52High      : {{ api.week52High }} </br>
+                week52Low       : {{ api.week52Low }} </br>
+                ytdChange       : {{ api.ytdChange }} </br>
+                Previous Close  : {{ api.previousClose }} </br>
+            </p>
+        {% endif %}
+        
+    {% endif %}
 {% endblock %}
