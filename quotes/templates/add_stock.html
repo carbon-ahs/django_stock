@@ -5,6 +5,11 @@
 
 {% block content %}
     <h1> Stock </h1>
-
+        
+        <form action="{% url 'add_stock' %}" class="d-flex" method="POST">
+            {% csrf_token %}
+            <input class="form-control me-2" type="search" placeholder="Input Your Ticker" aria-label="Search" name = 'ticker'>
+            <button class="btn btn-outline-secondary" type="submit">Submit</button> 
+        </form>
 
 {% endblock %}

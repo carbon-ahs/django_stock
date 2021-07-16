@@ -1,5 +1,7 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from . models import Stock
+from . forms import StockForm
+from django.contrib import messages
 # Create your views here.
 def home(request):
     # pk_4795a3382d6442558cd97acafe4b28ec 
@@ -50,9 +52,26 @@ def about(request):
     return render(request, 'about.html', contex)
 
 
-def add_stock(request):
+def add_stock(request): 
+    tickers = Stock.objects.all()
+    if request.method == 'POST':
+        # ticker = request.POST['ticker']
 
-    contex = {
-        'key': 'value',
-    }
-    return render(request, 'add_stock.html', contex)
+        form = StockForm(request.POST or None)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Stock added successfully")
+
+
+        contex = {
+            'key': 'value',
+        }
+        return render(request, 'add_stock.html', contex)
+
+        
+    else:
+        contex = {
+            'key': 'value',
+        }
+        return render(request, 'add_stock.html', contex)
