@@ -53,7 +53,6 @@ def about(request):
 
 
 def add_stock(request): 
-    tickers = Stock.objects.all()
     if request.method == 'POST':
         # ticker = request.POST['ticker']
 
@@ -63,15 +62,19 @@ def add_stock(request):
             form.save()
             messages.success(request, "Stock added successfully")
 
-
-        contex = {
-            'key': 'value',
-        }
-        return render(request, 'add_stock.html', contex)
-
-        
+        return redirect(add_stock)
     else:
+        tickers = Stock.objects.all()
         contex = {
             'key': 'value',
+            'tickers': tickers,
         }
         return render(request, 'add_stock.html', contex)
+
+
+def delete_stock(request, stock_id): 
+    item = Stock.objects.get(pk=stock_id)
+    item.delete()
+    item.save()
+    messages.success(request, ("deleed"))
+    return redirect(add_stock)    
