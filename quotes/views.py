@@ -49,3 +49,10 @@ def about(request):
     }
     return render(request, 'about.html', contex)
 
+
+def add_stock(request):
+
+    contex = {
+        'key': 'value',
+    }
+    return render(request, 'add_stock.html', contex)
