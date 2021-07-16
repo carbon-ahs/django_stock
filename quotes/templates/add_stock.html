@@ -11,5 +11,30 @@
             <input class="form-control me-2" type="search" placeholder="Input Your Ticker" aria-label="Search" name = 'ticker'>
             <button class="btn btn-outline-secondary" type="submit">Submit</button> 
         </form>
-
+    
+    {% if output_api %}
+        <div>
+            <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total marketCap</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for api in output_api %}
+                <tr>
+                <th scope="row">1</th>
+                <td>{{ api.companyName }}</td>
+                <td>{{ api.latestPrice }}</td>
+                <td>{{ api.marketCap }}</td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+            </table>
+        </div>
+    {% endif %}
 {% endblock %}
